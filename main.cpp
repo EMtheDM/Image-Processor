@@ -366,19 +366,17 @@ vector<vector<Pixel> > process_5(const vector<vector<Pixel> > &image, int number
     if (angle % 90 != 0)
     {
         cout << "angle must be a multiple of 90 degrees." << endl;
-    } else if (angle % 360 == 0)
-    {
-        return image;
-    } else if (angle % 360 == 90)
-    {
-        return process_4(image);
-    } else if (angle % 360 == 180)
-    {
-        return process_4(process_4(image));
-    } else
-    {
-        return process_4(process_4(process_4(image)));
     }
+
+    int rotation = (angle % 360) / 90.0;
+    vector<vector<Pixel> > new_image = image;
+
+    for (int i = 0; i < rotation; i++)
+    {
+        new_image = process_4(new_image);
+    }
+
+    return new_image;
 }
 
 // Process 6
@@ -565,16 +563,16 @@ vector<vector<Pixel> > process_10(const vector<vector<Pixel> > &image)
 string menu(string filename)
 {
     cout << "IMAGE PROCESSING MENU" << endl;
-    cout << "0) Change Image (current: " << filename << ")" << endl;
-    cout << "1) Vignette" << endl;
-    cout << "2) Clarendon" << endl;
-    cout << "3) Grayscale" << endl;
-    cout << "4) Rotate 90 Degrees" << endl;
-    cout << "5) Rotate Multiple 90 Degrees" << endl;
-    cout << "6) Enlarge" << endl;
-    cout << "7) High Contrast" << endl;
-    cout << "8) Lighten" << endl;
-    cout << "9) Darken" << endl;
+    cout << " 0) Change Image (current: " << filename << ")" << endl;
+    cout << " 1) Vignette" << endl;
+    cout << " 2) Clarendon" << endl;
+    cout << " 3) Grayscale" << endl;
+    cout << " 4) Rotate 90 Degrees" << endl;
+    cout << " 5) Rotate Multiple 90 Degrees" << endl;
+    cout << " 6) Enlarge" << endl;
+    cout << " 7) High Contrast" << endl;
+    cout << " 8) Lighten" << endl;
+    cout << " 9) Darken" << endl;
     cout << "10) Black, White, Red, Green, Blue" << endl;
     cout << "" << endl;
     cout << "Make a selection (Q to quit): ";
@@ -821,7 +819,56 @@ int main()
             }
 
             // Runs the proper process and writes the image to user provided output file.
-            new_image = process_3(image);
+            new_image = process_4(image);
+            write_image(rotate_output, new_image);
+            cout << "Successfully applied rotate 90 degrees and saved to " << rotate_output << "!" << endl;
+        }
+
+        // UI if user selects option "5"
+        else if (selection == "5")
+        {
+            cout << "Rotate 90 Degrees selected" << endl;
+            cout << "Enter output filename (.bmp only): ";
+            cin >> rotate_output;
+
+            // Checks to make sure user sets output to .bmp file.
+            if (rotate_output.substr(rotate_output.length() - 4) != ".bmp")
+            {
+                cout << "Error: Output file must be a .bmp file." << endl;
+                return 1;
+            }
+
+            // Checks to make sure user doesn't title output the same as input which would override input.
+            if (rotate_output == filename)
+            {
+                cout << "Error: output filename cannot be the same as input filename." << endl;
+                return 1;
+            }
+
+            // Checks to make sure user doesn't title output the same as another output which would override that output.
+            if (rotate_output == vignette_output || rotate_output == grayscale_output || rotate_output ==
+                clarendon_output || rotate_output == rotate_multiple_output || rotate_output == enlarge_output ||
+                rotate_output == contrast_output || rotate_output == lighten_output || rotate_output ==
+                darken_output || rotate_output == color_output)
+            {
+                cout << "Error: current output filename cannot be the same as another output filename." << endl;
+                cout << "Failed to write rotate 90 degrees image." << endl;
+                return 1;
+            }
+
+            cout << "Enter number: ";
+            int number;
+            cin >> number;
+
+            // Checks to make sure number is greater than 0.
+            if (number <= 0)
+            {
+                cout << "Error: number must be greater than 0." << endl;
+                return 1;
+            }
+
+            // Runs the proper process and writes the image to user provided output file.
+            new_image = process_5(image, number);
             write_image(rotate_output, new_image);
             cout << "Successfully applied rotate 90 degrees and saved to " << rotate_output << "!" << endl;
         }
