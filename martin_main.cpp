@@ -21,7 +21,6 @@ PLEASE FILL OUT THIS SECTION PRIOR TO SUBMISSION
 #include <vector>
 #include <fstream>
 #include <cmath>
-
 using namespace std;
 
 //***************************************************************************************************//
@@ -45,7 +44,7 @@ struct Pixel
  * @param bytes  the number of bytes to read
  * @return the integer starting at the given offset
  */
-int get_int(fstream &stream, int offset, int bytes)
+int get_int(fstream& stream, int offset, int bytes)
 {
     stream.seekg(offset);
     int result = 0;
@@ -63,7 +62,7 @@ int get_int(fstream &stream, int offset, int bytes)
  * @param filename BMP image filename
  * @return the image as a vector of vector of Pixels
  */
-vector<vector<Pixel> > read_image(string filename)
+vector<vector<Pixel>> read_image(string filename)
 {
     // Open the binary file
     fstream stream;
@@ -91,7 +90,7 @@ vector<vector<Pixel> > read_image(string filename)
     }
 
     // Create a vector the size of the input image
-    vector<vector<Pixel> > image(height, vector<Pixel>(width));
+    vector<vector<Pixel>> image(height, vector<Pixel> (width));
 
     int pos = start;
     // For each row, starting from the last row to the first
@@ -140,7 +139,7 @@ void set_bytes(unsigned char arr[], int offset, int bytes, int value)
 {
     for (int i = 0; i < bytes; i++)
     {
-        arr[offset + i] = (unsigned char) (value >> (i * 8));
+        arr[offset+i] = (unsigned char)(value>>(i*8));
     }
 }
 
@@ -150,7 +149,7 @@ void set_bytes(unsigned char arr[], int offset, int bytes, int value)
  * @param image    The input image to save
  * @return True if successful and false otherwise
  */
-bool write_image(string filename, const vector<vector<Pixel> > &image)
+bool write_image(string filename, const vector<vector<Pixel>>& image)
 {
     // Get the image width and height in pixels
     int width_pixels = image[0].size();
@@ -182,29 +181,29 @@ bool write_image(string filename, const vector<vector<Pixel> > &image)
     unsigned char dib_header[DIB_HEADER_SIZE] = {0};
 
     // BMP Header
-    set_bytes(bmp_header, 0, 1, 'B'); // ID field
-    set_bytes(bmp_header, 1, 1, 'M'); // ID field
-    set_bytes(bmp_header, 2, 4, BMP_HEADER_SIZE + DIB_HEADER_SIZE + array_bytes); // Size of BMP file
-    set_bytes(bmp_header, 6, 2, 0); // Reserved
-    set_bytes(bmp_header, 8, 2, 0); // Reserved
-    set_bytes(bmp_header, 10, 4, BMP_HEADER_SIZE + DIB_HEADER_SIZE); // Pixel array offset
+    set_bytes(bmp_header,  0, 1, 'B');              // ID field
+    set_bytes(bmp_header,  1, 1, 'M');              // ID field
+    set_bytes(bmp_header,  2, 4, BMP_HEADER_SIZE+DIB_HEADER_SIZE+array_bytes); // Size of BMP file
+    set_bytes(bmp_header,  6, 2, 0);                // Reserved
+    set_bytes(bmp_header,  8, 2, 0);                // Reserved
+    set_bytes(bmp_header, 10, 4, BMP_HEADER_SIZE+DIB_HEADER_SIZE); // Pixel array offset
 
     // DIB Header
-    set_bytes(dib_header, 0, 4, DIB_HEADER_SIZE); // DIB header size
-    set_bytes(dib_header, 4, 4, width_pixels); // Width of bitmap in pixels
-    set_bytes(dib_header, 8, 4, height_pixels); // Height of bitmap in pixels
-    set_bytes(dib_header, 12, 2, 1); // Number of color planes
-    set_bytes(dib_header, 14, 2, 24); // Number of bits per pixel
-    set_bytes(dib_header, 16, 4, 0); // Compression method (0=BI_RGB)
-    set_bytes(dib_header, 20, 4, array_bytes); // Size of raw bitmap data (including padding)
-    set_bytes(dib_header, 24, 4, 2835); // Print resolution of image (2835 pixels/meter)
-    set_bytes(dib_header, 28, 4, 2835); // Print resolution of image (2835 pixels/meter)
-    set_bytes(dib_header, 32, 4, 0); // Number of colors in palette
-    set_bytes(dib_header, 36, 4, 0); // Number of important colors
+    set_bytes(dib_header,  0, 4, DIB_HEADER_SIZE);  // DIB header size
+    set_bytes(dib_header,  4, 4, width_pixels);     // Width of bitmap in pixels
+    set_bytes(dib_header,  8, 4, height_pixels);    // Height of bitmap in pixels
+    set_bytes(dib_header, 12, 2, 1);                // Number of color planes
+    set_bytes(dib_header, 14, 2, 24);               // Number of bits per pixel
+    set_bytes(dib_header, 16, 4, 0);                // Compression method (0=BI_RGB)
+    set_bytes(dib_header, 20, 4, array_bytes);      // Size of raw bitmap data (including padding)
+    set_bytes(dib_header, 24, 4, 2835);             // Print resolution of image (2835 pixels/meter)
+    set_bytes(dib_header, 28, 4, 2835);             // Print resolution of image (2835 pixels/meter)
+    set_bytes(dib_header, 32, 4, 0);                // Number of colors in palette
+    set_bytes(dib_header, 36, 4, 0);                // Number of important colors
 
     // Write the BMP and DIB Headers to the file
-    stream.write((char *) bmp_header, sizeof(bmp_header));
-    stream.write((char *) dib_header, sizeof(dib_header));
+    stream.write((char*)bmp_header, sizeof(bmp_header));
+    stream.write((char*)dib_header, sizeof(dib_header));
 
     // Initialize pixel and padding
     unsigned char pixel[3] = {0};
@@ -219,10 +218,10 @@ bool write_image(string filename, const vector<vector<Pixel> > &image)
             pixel[0] = image[h][w].blue;
             pixel[1] = image[h][w].green;
             pixel[2] = image[h][w].red;
-            stream.write((char *) pixel, 3);
+            stream.write((char*)pixel, 3);
         }
         // Write the padding bytes
-        stream.write((char *) padding, padding_bytes);
+        stream.write((char *)padding, padding_bytes);
     }
 
     // Close the stream and return true
