@@ -676,6 +676,7 @@ bool is_number(const string &str)
 
 int main()
 {
+    cout << "" << endl;
     cout << "CSPB 1300 Image Processing Application" << endl;
     cout << "" << endl;
     cout << "Please enter a filename (.bmp only): ";
@@ -721,6 +722,7 @@ int main()
         {
             cout << "" << endl;
             cout << "Quitting program....Goodbye!" << endl;
+            cout << "" << endl;
             break;
         }
 
@@ -743,7 +745,9 @@ int main()
         // UI if user selects option "1"
         else if (selection == "1")
         {
+            cout << "" << endl;
             cout << "Vignette selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> vignette_output;
 
@@ -782,7 +786,9 @@ int main()
         // UI if user selects option "2"
         else if (selection == "2")
         {
+            cout << "" << endl;
             cout << "Clarendon selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> clarendon_output;
 
@@ -832,7 +838,9 @@ int main()
         // UI if user selects option "3"
         else if (selection == "3")
         {
+            cout << "" << endl;
             cout << "Grayscale selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> grayscale_output;
 
@@ -871,7 +879,9 @@ int main()
         // UI if user selects option "4"
         else if (selection == "4")
         {
+            cout << "" << endl;
             cout << "Rotate 90 Degrees selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> rotate_output;
 
@@ -910,7 +920,9 @@ int main()
         // UI if user selects option "5"
         else if (selection == "5")
         {
+            cout << "" << endl;
             cout << "Rotate 90 Degrees selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> rotate_output;
 
@@ -960,7 +972,9 @@ int main()
         // UI if user selects option "6"
         else if (selection == "6")
         {
+            cout << "" << endl;
             cout << "Enlarge selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> enlarge_output;
 
@@ -1021,7 +1035,9 @@ int main()
         // UI if user selects option "7"
         else if (selection == "7")
         {
+            cout << "" << endl;
             cout << "High Contrast selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> contrast_output;
 
@@ -1060,7 +1076,9 @@ int main()
         // UI if user selects option "8"
         else if (selection == "8")
         {
+            cout << "" << endl;
             cout << "Lighten selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> lighten_output;
 
@@ -1110,7 +1128,9 @@ int main()
         // UI if user selects option "9"
         else if (selection == "9")
         {
+            cout << "" << endl;
             cout << "Darken selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> darken_output;
 
@@ -1160,7 +1180,9 @@ int main()
         // UI if user selects option "10"
         else if (selection == "10")
         {
+            cout << "" << endl;
             cout << "Black, White, Red, Green, Blue selected" << endl;
+            cout << "" << endl;
             cout << "Enter output filename (.bmp only): ";
             cin >> color_output;
 
