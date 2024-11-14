@@ -14,7 +14,7 @@ PLEASE FILL OUT THIS SECTION PRIOR TO SUBMISSION
     N/A
 
 - Did you do any optional enhancements? If so, please explain:
-
+    NO
 */
 
 #include <iostream>
@@ -233,6 +233,7 @@ bool write_image(string filename, const vector<vector<Pixel>>& image)
 //                                DO NOT MODIFY THE SECTION ABOVE                                    //
 //***************************************************************************************************//
 
+
 // Process 1
 vector<vector<Pixel>> process_1(const vector<vector<Pixel>>& image)
 {
@@ -256,7 +257,12 @@ vector<vector<Pixel>> process_1(const vector<vector<Pixel>>& image)
             int new_green = green_value * scaling_factor;
             int new_blue = blue_value * scaling_factor;
 
-            new_image[row][col] = Pixel(new_red, new_green, new_blue);
+            Pixel new_pixel;
+            new_pixel.red = new_red;
+            new_pixel.green = new_green;
+            new_pixel.blue = new_blue;
+
+            new_image[row][col] = new_pixel;
         }
     }
 
@@ -287,21 +293,38 @@ vector<vector<Pixel>> process_2(const vector<vector<Pixel>>& image, double scali
                 int new_green = (255 - (255 - green_value) * scaling_factor);
                 int new_blue = (255 - (255 - blue_value) * scaling_factor);
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
-            } else if (average_value <= 90)
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
+            }
+            else if (average_value <= 90)
             {
                 int new_red = red_value * scaling_factor;
                 int new_green = green_value * scaling_factor;
                 int new_blue = blue_value * scaling_factor;
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
-            } else
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
+            }
+            else
             {
                 int new_red = red_value;
                 int new_green = green_value;
                 int new_blue = blue_value;
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
             }
         }
     }
@@ -331,7 +354,12 @@ vector<vector<Pixel>> process_3(const vector<vector<Pixel>>& image)
             int new_green = gray_value;
             int new_blue = gray_value;
 
-            new_image[row][col] = Pixel(new_red, new_green, new_blue);
+            Pixel new_pixel;
+            new_pixel.red = new_red;
+            new_pixel.green = new_green;
+            new_pixel.blue = new_blue;
+
+            new_image[row][col] = new_pixel;
         }
     }
 
@@ -430,14 +458,24 @@ vector<vector<Pixel>> process_7(const vector<vector<Pixel>>& image)
                 int new_green = 255;
                 int new_blue = 255;
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
             } else
             {
                 int new_red = 0;
                 int new_green = 0;
                 int new_blue = 0;
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
             }
         }
     }
@@ -465,7 +503,12 @@ vector<vector<Pixel>> process_8(const vector<vector<Pixel>>& image, double scali
             double new_green = (255 - (255 - green_value) * scaling_factor);
             double new_blue = (255 - (255 - blue_value) * scaling_factor);
 
-            new_image[row][col] = Pixel(new_red, new_green, new_blue);
+            Pixel new_pixel;
+            new_pixel.red = new_red;
+            new_pixel.green = new_green;
+            new_pixel.blue = new_blue;
+
+            new_image[row][col] = new_pixel;
         }
     }
 
@@ -492,7 +535,12 @@ vector<vector<Pixel>> process_9(const vector<vector<Pixel>>& image, double scali
             double new_green = green_value * scaling_factor;
             double new_blue = blue_value * scaling_factor;
 
-            new_image[row][col] = Pixel(new_red, new_green, new_blue);
+            Pixel new_pixel;
+            new_pixel.red = new_red;
+            new_pixel.green = new_green;
+            new_pixel.blue = new_blue;
+
+            new_image[row][col] = new_pixel;
         }
     }
 
@@ -523,35 +571,64 @@ vector<vector<Pixel>> process_10(const vector<vector<Pixel>>& image)
                 int new_green = 255;
                 int new_blue = 255;
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
-            } else if (red_value + green_value + blue_value <= 150)
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
+            }
+            else if (red_value + green_value + blue_value <= 150)
             {
                 int new_red = 0;
                 int new_green = 0;
                 int new_blue = 0;
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
-            } else if (max_color == red_value)
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
+            }
+            else if (max_color == red_value)
             {
                 int new_red = 255;
                 int new_green = 0;
                 int new_blue = 0;
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
-            } else if (max_color == green_value)
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
+            }
+            else if (max_color == green_value)
             {
                 int new_red = 0;
                 int new_green = 255;
                 int new_blue = 0;
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
-            } else
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
+            }
+            else
             {
                 int new_red = 0;
                 int new_green = 0;
                 int new_blue = 255;
 
-                new_image[row][col] = Pixel(new_red, new_green, new_blue);
+                Pixel new_pixel;
+                new_pixel.red = new_red;
+                new_pixel.green = new_green;
+                new_pixel.blue = new_blue;
+
+                new_image[row][col] = new_pixel;
             }
         }
     }
