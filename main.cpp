@@ -941,6 +941,45 @@ int main()
             cout << "" << endl;
             cout << "Successfully applied enlarge and saved to " << enlarge_output << "!" << endl;
         }
+
+        // UI if user selects option "7"
+        else if (selection == "7")
+        {
+            cout << "High Contrast selected" << endl;
+            cout << "Enter output filename (.bmp only): ";
+            cin >> contrast_output;
+
+            // Checks to make sure user sets output to .bmp file.
+            if (contrast_output.substr(contrast_output.length() - 4) != ".bmp")
+            {
+                cout << "Error: Output file must be a .bmp file." << endl;
+                return 1;
+            }
+
+            // Checks to make sure user doesn't title output the same as input which would override input.
+            if (contrast_output == filename)
+            {
+                cout << "Error: output filename cannot be the same as input filename." << endl;
+                return 1;
+            }
+
+            // Checks to make sure user doesn't title output the same as another output which would override that output.
+            if (contrast_output == vignette_output || contrast_output == clarendon_output || contrast_output ==
+                grayscale_output || contrast_output == rotate_multiple_output || contrast_output == enlarge_output ||
+                contrast_output == rotate_output || contrast_output == lighten_output || contrast_output ==
+                darken_output || contrast_output == color_output)
+            {
+                cout << "Error: current output filename cannot be the same as another output filename." << endl;
+                cout << "Failed to write high contrast image." << endl;
+                return 1;
+            }
+
+            // Runs the proper process and writes the image to user provided output file.
+            new_image = process_7(image);
+            write_image(contrast_output, new_image);
+            cout << "" << endl;
+            cout << "Successfully applied high contrast and saved to " << contrast_output << "!" << endl;
+        }
     }
 
     return 0;
