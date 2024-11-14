@@ -234,12 +234,12 @@ bool write_image(string filename, const vector<vector<Pixel>>& image)
 //***************************************************************************************************//
 
 // Process 1
-vector<vector<Pixel> > process_1(const vector<vector<Pixel> > &image)
+vector<vector<Pixel>> process_1(const vector<vector<Pixel>>& image)
 {
     int height = image.size();
     int width = image[0].size();
 
-    vector<vector<Pixel> > new_image(height, vector<Pixel>(width));
+    vector<vector<Pixel>> new_image(height, vector<Pixel>(width));
 
     for (int row = 0; row < height; row++)
     {
@@ -264,12 +264,12 @@ vector<vector<Pixel> > process_1(const vector<vector<Pixel> > &image)
 }
 
 // Process 2
-vector<vector<Pixel> > process_2(const vector<vector<Pixel> > &image, double scaling_factor)
+vector<vector<Pixel>> process_2(const vector<vector<Pixel>>& image, double scaling_factor)
 {
     int height = image.size();
     int width = image[0].size();
 
-    vector<vector<Pixel> > new_image(height, vector<Pixel>(width));
+    vector<vector<Pixel>> new_image(height, vector<Pixel>(width));
 
     for (int row = 0; row < height; row++)
     {
@@ -310,12 +310,12 @@ vector<vector<Pixel> > process_2(const vector<vector<Pixel> > &image, double sca
 }
 
 // Process 3
-vector<vector<Pixel> > process_3(const vector<vector<Pixel> > &image)
+vector<vector<Pixel>> process_3(const vector<vector<Pixel>>& image)
 {
     int height = image.size();
     int width = image[0].size();
 
-    vector<vector<Pixel> > new_image(height, vector<Pixel>(width));
+    vector<vector<Pixel>> new_image(height, vector<Pixel>(width));
 
     for (int row = 0; row < height; row++)
     {
@@ -339,12 +339,12 @@ vector<vector<Pixel> > process_3(const vector<vector<Pixel> > &image)
 }
 
 // Process 4
-vector<vector<Pixel> > process_4(const vector<vector<Pixel> > &image)
+vector<vector<Pixel>> process_4(const vector<vector<Pixel>>& image)
 {
     int height = image.size();
     int width = image[0].size();
 
-    vector<vector<Pixel> > new_image(width, vector<Pixel>(height));
+    vector<vector<Pixel>> new_image(width, vector<Pixel>(height));
 
     for (int row = 0; row < height; row++)
     {
@@ -358,7 +358,7 @@ vector<vector<Pixel> > process_4(const vector<vector<Pixel> > &image)
 }
 
 // Process 5
-vector<vector<Pixel> > process_5(const vector<vector<Pixel> > &image, int number)
+vector<vector<Pixel>> process_5(const vector<vector<Pixel>>& image, int number)
 {
     int angle = number * 90;
 
@@ -368,7 +368,7 @@ vector<vector<Pixel> > process_5(const vector<vector<Pixel> > &image, int number
     }
 
     int rotation = (angle % 360) / 90.0;
-    vector<vector<Pixel> > new_image = image;
+    vector<vector<Pixel>> new_image = image;
 
     for (int i = 0; i < rotation; i++)
     {
@@ -379,7 +379,7 @@ vector<vector<Pixel> > process_5(const vector<vector<Pixel> > &image, int number
 }
 
 // Process 6
-vector<vector<Pixel> > process_6(const vector<vector<Pixel> > &image, int x_scale, int y_scale)
+vector<vector<Pixel>> process_6(const vector<vector<Pixel>>& image, int x_scale, int y_scale)
 {
     int height = image.size();
     int width = image[0].size();
@@ -387,7 +387,7 @@ vector<vector<Pixel> > process_6(const vector<vector<Pixel> > &image, int x_scal
     int new_height = y_scale * height;
     int new_width = x_scale * width;
 
-    vector<vector<Pixel> > new_image(new_height, vector<Pixel>(new_width));
+    vector<vector<Pixel>> new_image(new_height, vector<Pixel>(new_width));
 
     for (int row = 0; row < new_height; row++)
     {
@@ -407,12 +407,12 @@ vector<vector<Pixel> > process_6(const vector<vector<Pixel> > &image, int x_scal
 }
 
 // Process 7
-vector<vector<Pixel> > process_7(const vector<vector<Pixel> > &image)
+vector<vector<Pixel>> process_7(const vector<vector<Pixel>>& image)
 {
     int height = image.size();
     int width = image[0].size();
 
-    vector<vector<Pixel> > new_image(height, vector<Pixel>(width));
+    vector<vector<Pixel>> new_image(height, vector<Pixel>(width));
 
     for (int row = 0; row < height; row++)
     {
@@ -446,12 +446,12 @@ vector<vector<Pixel> > process_7(const vector<vector<Pixel> > &image)
 }
 
 // Process 8
-vector<vector<Pixel> > process_8(const vector<vector<Pixel> > &image, double scaling_factor)
+vector<vector<Pixel>> process_8(const vector<vector<Pixel>>& image, double scaling_factor)
 {
     int height = image.size();
     int width = image[0].size();
 
-    vector<vector<Pixel> > new_image(height, vector<Pixel>(width));
+    vector<vector<Pixel>> new_image(height, vector<Pixel>(width));
 
     for (int row = 0; row < height; row++)
     {
@@ -473,12 +473,12 @@ vector<vector<Pixel> > process_8(const vector<vector<Pixel> > &image, double sca
 }
 
 // Process 9
-vector<vector<Pixel> > process_9(const vector<vector<Pixel> > &image, double scaling_factor)
+vector<vector<Pixel>> process_9(const vector<vector<Pixel>>& image, double scaling_factor)
 {
     int height = image.size();
     int width = image[0].size();
 
-    vector<vector<Pixel> > new_image(height, vector<Pixel>(width));
+    vector<vector<Pixel>> new_image(height, vector<Pixel>(width));
 
     for (int row = 0; row < height; row++)
     {
@@ -500,12 +500,12 @@ vector<vector<Pixel> > process_9(const vector<vector<Pixel> > &image, double sca
 }
 
 // Process 10
-vector<vector<Pixel> > process_10(const vector<vector<Pixel> > &image)
+vector<vector<Pixel>> process_10(const vector<vector<Pixel>>& image)
 {
     int height = image.size();
     int width = image[0].size();
 
-    vector<vector<Pixel> > new_image(height, vector<Pixel>(width));
+    vector<vector<Pixel>> new_image(height, vector<Pixel>(width));
 
     for (int row = 0; row < height; row++)
     {
@@ -611,8 +611,8 @@ int main()
         return 1;
     }
 
-    vector<vector<Pixel> > image = read_image(filename);
-    vector<vector<Pixel> > new_image;
+    vector<vector<Pixel>> image = read_image(filename);
+    vector<vector<Pixel>> new_image;
 
     string selection;
     string vignette_output;
