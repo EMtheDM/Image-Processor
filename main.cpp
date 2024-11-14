@@ -562,7 +562,9 @@ vector<vector<Pixel> > process_10(const vector<vector<Pixel> > &image)
 
 string menu(string filename)
 {
+    cout << "" << endl;
     cout << "IMAGE PROCESSING MENU" << endl;
+    cout << "" << endl;
     cout << " 0) Change Image (current: " << filename << ")" << endl;
     cout << " 1) Vignette" << endl;
     cout << " 2) Clarendon" << endl;
@@ -641,6 +643,7 @@ int main()
 
         if (selection == "Q" || selection == "q")
         {
+            cout << "" << endl;
             cout << "Quitting program....Goodbye!" << endl;
             break;
         }
@@ -696,6 +699,7 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_1(image);
             write_image(vignette_output, new_image);
+            cout << "" << endl;
             cout << "Successfully applied vignette and saved to " << vignette_output << "!" << endl;
         }
 
@@ -745,6 +749,7 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_2(image, scaling_factor);
             write_image(clarendon_output, new_image);
+            cout << "" << endl;
             cout << "Successfully applied clarendon and saved to " << clarendon_output << "!" << endl;
         }
 
@@ -783,6 +788,7 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_3(image);
             write_image(grayscale_output, new_image);
+            cout << "" << endl;
             cout << "Successfully applied grayscale and saved to " << grayscale_output << "!" << endl;
         }
 
@@ -821,6 +827,7 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_4(image);
             write_image(rotate_output, new_image);
+            cout << "" << endl;
             cout << "Successfully applied rotate 90 degrees and saved to " << rotate_output << "!" << endl;
         }
 
@@ -870,7 +877,69 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_5(image, number);
             write_image(rotate_output, new_image);
+            cout << "" << endl;
             cout << "Successfully applied rotate 90 degrees and saved to " << rotate_output << "!" << endl;
+        }
+
+        // UI if user selects option "6"
+        else if (selection == "6")
+        {
+            cout << "Enlarge selected" << endl;
+            cout << "Enter output filename (.bmp only): ";
+            cin >> enlarge_output;
+
+            // Checks to make sure user sets output to .bmp file.
+            if (enlarge_output.substr(enlarge_output.length() - 4) != ".bmp")
+            {
+                cout << "Error: Output file must be a .bmp file." << endl;
+                return 1;
+            }
+
+            // Checks to make sure user doesn't title output the same as input which would override input.
+            if (enlarge_output == filename)
+            {
+                cout << "Error: output filename cannot be the same as input filename." << endl;
+                return 1;
+            }
+
+            // Checks to make sure user doesn't title output the same as another output which would override that output.
+            if (enlarge_output == vignette_output || enlarge_output == grayscale_output || enlarge_output ==
+                clarendon_output || enlarge_output == rotate_multiple_output || enlarge_output == rotate_output ||
+                enlarge_output == contrast_output || enlarge_output == lighten_output || enlarge_output ==
+                darken_output || enlarge_output == color_output)
+            {
+                cout << "Error: current output filename cannot be the same as another output filename." << endl;
+                cout << "Failed to write enlarge image." << endl;
+                return 1;
+            }
+
+            cout << "Enter a number (height): ";
+            int x_scale;
+            cin >> x_scale;
+
+            // Checks to make sure number is greater than 0.
+            if (x_scale <= 0)
+            {
+                cout << "Error: number must be greater than 0." << endl;
+                return 1;
+            }
+
+            cout << "Enter another number (width): ";
+            int y_scale;
+            cin >> y_scale;
+
+            // Checks to make sure number is greater than 0.
+            if (y_scale <= 0)
+            {
+                cout << "Error: number must be greater than 0." << endl;
+                return 1;
+            }
+
+            // Runs the proper process and writes the image to user provided output file.
+            new_image = process_6(image, x_scale, y_scale);
+            write_image(enlarge_output, new_image);
+            cout << "" << endl;
+            cout << "Successfully applied enlarge and saved to " << enlarge_output << "!" << endl;
         }
     }
 
