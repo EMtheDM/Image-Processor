@@ -576,6 +576,7 @@ string menu(string filename)
     cout << "8) Lighten" << endl;
     cout << "9) Darken" << endl;
     cout << "10) Black, White, Red, Green, Blue" << endl;
+    cout << "" << endl;
     cout << "Make a selection (Q to quit): ";
 
     string selection;
