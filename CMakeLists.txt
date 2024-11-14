@@ -4,4 +4,4 @@ project(final)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(main.cpp
-        main.cpp)
+        martin_main.cpp)
