@@ -661,17 +661,47 @@ string menu(string filename)
     return selection;
 }
 
-bool is_number(const string &str)
+string get_valid_filename(string prompt)
 {
-    for (char c: str)
+    string filename;
+    while (true)
     {
-        if (!isdigit(c))
+        cout << prompt;
+        cin >> filename;
+        if (filename.length() >= 4 && filename.substr(filename.length() - 4) == ".bmp")
         {
-            return false;
+            return filename;
+        }
+        cout << "Error: Input file must be a .bmp file." << endl;
+    }
+}
+
+string get_output_filename(string input_filename, vector<string> existing_outputs, string prompt)
+{
+    string output_filename;
+    while (true)
+    {
+        cout << prompt;
+        cin >> output_filename;
+        if (output_filename.length() < 4 || output_filename.substr(output_filename.length() -4) != ".bmp")
+        {
+            cout << "Error: Output file must be a .bmp file." << endl;
+        }
+        else if (output_filename == input_filename)
+        {
+            cout << "Error: Output filename cannot be the same as the input filename." << endl;
+        }
+        else if (find(existing_outputs.begin(), existing_outputs.end(), output_filename) != existing_outputs.end())
+        {
+            cout << "Error: Output filename already exists." << endl;
+        }
+        else
+        {
+            return output_filename;
         }
     }
-    return true;
 }
+
 
 
 int main()
@@ -686,11 +716,12 @@ int main()
     if (filename.substr(filename.length() - 4) != ".bmp")
     {
         cout << "Error: Input file must be a .bmp file." << endl;
-        return 1;
+        main();
     }
 
     vector<vector<Pixel>> image = read_image(filename);
     vector<vector<Pixel>> new_image;
+    vector<string> output_filename;
 
     string selection;
     string vignette_output;
@@ -715,7 +746,6 @@ int main()
             selection != "Q" && selection != "q")
         {
             cout << "Error. Input must be between 0-10 or Q/q to quit." << endl;
-            return 1;
         }
 
         if (selection == "Q" || selection == "q")
@@ -729,16 +759,7 @@ int main()
         // UI if user selects option "0"
         if (selection == "0")
         {
-            cout << "Please enter a filename (.bmp only): ";
-            cin >> filename;
-
-            // Checks to make sure user selects .bmp file.
-            if (filename.substr(filename.length() - 4) != ".bmp")
-            {
-                cout << "Error: Input file must be a .bmp file." << endl;
-                return 1;
-            }
-
+            filename = get_valid_filename("Please enter a filename (.bmp only): ");
             image = read_image(filename);
         }
 
@@ -762,7 +783,6 @@ int main()
             if (vignette_output == filename)
             {
                 cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
             }
 
             // Checks to make sure user doesn't title output the same as another output which would override that output.
@@ -773,7 +793,6 @@ int main()
             {
                 cout << "Error: current output filename cannot be the same as another output filename." << endl;
                 cout << "Failed to write vignette image." << endl;
-                return 1;
             }
 
             // Runs the proper process and writes the image to user provided output file.
