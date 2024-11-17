@@ -702,6 +702,38 @@ string get_output_filename(string input_filename, vector<string> existing_output
     }
 }
 
+int get_valid_number(string prompt, int min_value)
+{
+    int value;
+    while (true)
+    {
+        cout << prompt;
+        if (cin >> value && value >= min_value)
+        {
+            return value;
+        }
+        cout << "Error: Please enter a number greater than or equal to " << min_value << "." << endl;
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
+}
+
+int get_valid_scaling_factor(string prompt, double min_value, double max_value)
+{
+    double value;
+    while (true)
+    {
+        cout << prompt;
+        if (cin >> value && value > min_value && value < max_value)
+        {
+            return value;
+        }
+        cout << "Error: Please enter a number between " << min_value << " and " << max_value << "." << endl;
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
+}
+
 
 
 int main()
@@ -721,7 +753,7 @@ int main()
 
     vector<vector<Pixel>> image = read_image(filename);
     vector<vector<Pixel>> new_image;
-    vector<string> output_filename;
+    vector<string> output_filenames;
 
     string selection;
     string vignette_output;
@@ -769,31 +801,8 @@ int main()
             cout << "" << endl;
             cout << "Vignette selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> vignette_output;
-
-            // Checks to make sure user sets output to .bmp file.
-            if (vignette_output.substr(vignette_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (vignette_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (vignette_output == grayscale_output || vignette_output == clarendon_output || vignette_output ==
-                rotate_output || vignette_output == rotate_multiple_output || vignette_output == enlarge_output ||
-                vignette_output == contrast_output || vignette_output == lighten_output || vignette_output ==
-                darken_output || vignette_output == color_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write vignette image." << endl;
-            }
+            vignette_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(vignette_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_1(image);
@@ -808,44 +817,10 @@ int main()
             cout << "" << endl;
             cout << "Clarendon selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> clarendon_output;
+            clarendon_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(clarendon_output);
 
-            // Checks to make sure user sets output to .bmp file.
-            if (clarendon_output.substr(clarendon_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (clarendon_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (clarendon_output == vignette_output || clarendon_output == grayscale_output || clarendon_output ==
-                rotate_output || clarendon_output == rotate_multiple_output || clarendon_output == enlarge_output ||
-                clarendon_output == contrast_output || clarendon_output == lighten_output || clarendon_output ==
-                darken_output || clarendon_output == color_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write clarendon image." << endl;
-                return 1;
-            }
-
-            cout << "Enter scaling factor: ";
-            double scaling_factor;
-            cin >> scaling_factor;
-
-            // Checks to make sure scaling_factor is a number greater than 0.
-            if (scaling_factor < 0)
-            {
-                cout << "Error: scaling factor must be greater than 0." << endl;
-                return 1;
-            }
+            double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_2(image, scaling_factor);
@@ -860,33 +835,8 @@ int main()
             cout << "" << endl;
             cout << "Grayscale selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> grayscale_output;
-
-            // Checks to make sure user sets output to .bmp file.
-            if (grayscale_output.substr(grayscale_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (grayscale_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (grayscale_output == vignette_output || grayscale_output == clarendon_output || grayscale_output ==
-                rotate_output || grayscale_output == rotate_multiple_output || grayscale_output == enlarge_output ||
-                grayscale_output == contrast_output || grayscale_output == lighten_output || grayscale_output ==
-                darken_output || grayscale_output == color_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write grayscale image." << endl;
-                return 1;
-            }
+            grayscale_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(grayscale_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_3(image);
@@ -901,33 +851,8 @@ int main()
             cout << "" << endl;
             cout << "Rotate 90 Degrees selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> rotate_output;
-
-            // Checks to make sure user sets output to .bmp file.
-            if (rotate_output.substr(rotate_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (rotate_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (rotate_output == vignette_output || rotate_output == clarendon_output || rotate_output ==
-                grayscale_output || rotate_output == rotate_multiple_output || rotate_output == enlarge_output ||
-                rotate_output == contrast_output || rotate_output == lighten_output || rotate_output ==
-                darken_output || rotate_output == color_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write rotate 90 degrees image." << endl;
-                return 1;
-            }
+            rotate_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(vignette_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_4(image);
@@ -942,50 +867,16 @@ int main()
             cout << "" << endl;
             cout << "Rotate 90 Degrees selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> rotate_output;
+            rotate_multiple_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(rotate_multiple_output);
 
-            // Checks to make sure user sets output to .bmp file.
-            if (rotate_output.substr(rotate_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (rotate_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (rotate_output == vignette_output || rotate_output == grayscale_output || rotate_output ==
-                clarendon_output || rotate_output == rotate_multiple_output || rotate_output == enlarge_output ||
-                rotate_output == contrast_output || rotate_output == lighten_output || rotate_output ==
-                darken_output || rotate_output == color_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write rotate 90 degrees image." << endl;
-                return 1;
-            }
-
-            cout << "Enter number: ";
-            int number;
-            cin >> number;
-
-            // Checks to make sure number is greater than 0.
-            if (number <= 0)
-            {
-                cout << "Error: number must be greater than 0." << endl;
-                return 1;
-            }
+            int number = get_valid_number("Enter a number: ", 1);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_5(image, number);
-            write_image(rotate_output, new_image);
+            write_image(rotate_multiple_output, new_image);
             cout << "" << endl;
-            cout << "Successfully applied rotate 90 degrees and saved to " << rotate_output << "!" << endl;
+            cout << "Successfully applied rotate 90 degrees and saved to " << rotate_multiple_output << "!" << endl;
         }
 
         // UI if user selects option "6"
@@ -994,55 +885,11 @@ int main()
             cout << "" << endl;
             cout << "Enlarge selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> enlarge_output;
+            enlarge_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(enlarge_output);
 
-            // Checks to make sure user sets output to .bmp file.
-            if (enlarge_output.substr(enlarge_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (enlarge_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (enlarge_output == vignette_output || enlarge_output == grayscale_output || enlarge_output ==
-                clarendon_output || enlarge_output == rotate_multiple_output || enlarge_output == rotate_output ||
-                enlarge_output == contrast_output || enlarge_output == lighten_output || enlarge_output ==
-                darken_output || enlarge_output == color_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write enlarge image." << endl;
-                return 1;
-            }
-
-            cout << "Enter a number (height): ";
-            int x_scale;
-            cin >> x_scale;
-
-            // Checks to make sure number is greater than 0.
-            if (x_scale <= 0)
-            {
-                cout << "Error: number must be greater than 0." << endl;
-                return 1;
-            }
-
-            cout << "Enter another number (width): ";
-            int y_scale;
-            cin >> y_scale;
-
-            // Checks to make sure number is greater than 0.
-            if (y_scale <= 0)
-            {
-                cout << "Error: number must be greater than 0." << endl;
-                return 1;
-            }
+            int x_scale = get_valid_number("Enter a number: ", 1);
+            int y_scale = get_valid_number("Enter another number: ", 1);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_6(image, x_scale, y_scale);
@@ -1057,33 +904,8 @@ int main()
             cout << "" << endl;
             cout << "High Contrast selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> contrast_output;
-
-            // Checks to make sure user sets output to .bmp file.
-            if (contrast_output.substr(contrast_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (contrast_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (contrast_output == vignette_output || contrast_output == clarendon_output || contrast_output ==
-                grayscale_output || contrast_output == rotate_multiple_output || contrast_output == enlarge_output ||
-                contrast_output == rotate_output || contrast_output == lighten_output || contrast_output ==
-                darken_output || contrast_output == color_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write high contrast image." << endl;
-                return 1;
-            }
+            contrast_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(contrast_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_7(image);
@@ -1098,44 +920,10 @@ int main()
             cout << "" << endl;
             cout << "Lighten selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> lighten_output;
+            lighten_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(lighten_output);
 
-            // Checks to make sure user sets output to .bmp file.
-            if (lighten_output.substr(lighten_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (lighten_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (lighten_output == vignette_output || lighten_output == grayscale_output || lighten_output ==
-                clarendon_output || lighten_output == rotate_multiple_output || lighten_output == rotate_output ||
-                lighten_output == contrast_output || lighten_output == enlarge_output || lighten_output ==
-                darken_output || lighten_output == color_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write lighten image." << endl;
-                return 1;
-            }
-
-            cout << "Enter a number: ";
-            double scaling_factor;
-            cin >> scaling_factor;
-
-            // Checks to make sure number is greater than or equal to 0 and less than 1.
-            if (scaling_factor < 0 || scaling_factor >= 1)
-            {
-                cout << "Error: number must be greater than 0 and less than 1." << endl;
-                return 1;
-            }
+            double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_8(image, scaling_factor);
@@ -1150,44 +938,10 @@ int main()
             cout << "" << endl;
             cout << "Darken selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> darken_output;
+            darken_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(darken_output);
 
-            // Checks to make sure user sets output to .bmp file.
-            if (darken_output.substr(darken_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (darken_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (darken_output == vignette_output || darken_output == grayscale_output || darken_output ==
-                clarendon_output || darken_output == rotate_multiple_output || darken_output == rotate_output ||
-                darken_output == contrast_output || darken_output == lighten_output || darken_output ==
-                enlarge_output || darken_output == color_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write darken image." << endl;
-                return 1;
-            }
-
-            cout << "Enter a number: ";
-            double scaling_factor;
-            cin >> scaling_factor;
-
-            // Checks to make sure number is greater than or equal to 0 and less than 1.
-            if (scaling_factor < 0 || scaling_factor >= 1)
-            {
-                cout << "Error: number must be greater than or equal 0 and less than 1." << endl;
-                return 1;
-            }
+            double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_9(image, scaling_factor);
@@ -1202,33 +956,8 @@ int main()
             cout << "" << endl;
             cout << "Black, White, Red, Green, Blue selected" << endl;
             cout << "" << endl;
-            cout << "Enter output filename (.bmp only): ";
-            cin >> color_output;
-
-            // Checks to make sure user sets output to .bmp file.
-            if (color_output.substr(color_output.length() - 4) != ".bmp")
-            {
-                cout << "Error: Output file must be a .bmp file." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as input which would override input.
-            if (color_output == filename)
-            {
-                cout << "Error: output filename cannot be the same as input filename." << endl;
-                return 1;
-            }
-
-            // Checks to make sure user doesn't title output the same as another output which would override that output.
-            if (color_output == vignette_output || color_output == clarendon_output || color_output ==
-                grayscale_output || color_output == rotate_multiple_output || color_output == enlarge_output ||
-                color_output == rotate_output || color_output == lighten_output || color_output ==
-                darken_output || color_output == contrast_output)
-            {
-                cout << "Error: current output filename cannot be the same as another output filename." << endl;
-                cout << "Failed to write colored image." << endl;
-                return 1;
-            }
+            color_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            output_filenames.push_back(color_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_10(image);
