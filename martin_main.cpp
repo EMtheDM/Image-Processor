@@ -674,7 +674,9 @@ string get_valid_filename(string prompt)
         {
             return filename;
         }
+        cout << endl;
         cout << "Error: Input file must be a .bmp file." << endl;
+        cout << endl;
     }
 }
 
@@ -688,15 +690,21 @@ string get_output_filename(string input_filename, vector<string> existing_output
         cin >> output_filename;
         if (output_filename.length() < 4 || output_filename.substr(output_filename.length() -4) != ".bmp")
         {
+            cout << endl;
             cout << "Error: Output file must be a .bmp file." << endl;
+            cout << endl;
         }
         else if (output_filename == input_filename)
         {
+            cout << endl;
             cout << "Error: Output filename cannot be the same as the input filename." << endl;
+            cout << endl;
         }
         else if (find(existing_outputs.begin(), existing_outputs.end(), output_filename) != existing_outputs.end())
         {
+            cout << endl;
             cout << "Error: Output filename already exists." << endl;
+            cout << endl;
         }
         else
         {
@@ -716,7 +724,9 @@ int get_valid_number(string prompt, int min_value)
         {
             return value;
         }
+        cout << endl;
         cout << "Error: Please enter a number greater than or equal to " << min_value << "." << endl;
+        cout << endl;
         cin.clear();
         cin.ignore(1000, '\n');
     }
@@ -733,7 +743,9 @@ double get_valid_scaling_factor(string prompt, double min_value, double max_valu
         {
             return value;
         }
+        cout << endl;
         cout << "Error: Please enter a number between " << min_value << " and " << max_value << "." << endl;
+        cout << endl;
         cin.clear();
         cin.ignore(1000, '\n');
     }
@@ -746,15 +758,8 @@ int main()
     cout << "" << endl;
     cout << "CSPB 1300 Image Processing Application" << endl;
     cout << "" << endl;
-    cout << "Please enter a filename (.bmp only): ";
     string filename;
-    cin >> filename;
-
-    if (filename.substr(filename.length() - 4) != ".bmp")
-    {
-        cout << "Error: Input file must be a .bmp file." << endl;
-        main();
-    }
+    filename = get_valid_filename("Please enter a filename (.bmp only): ");
 
     vector<vector<Pixel>> image = read_image(filename);
     vector<vector<Pixel>> new_image;
@@ -782,7 +787,9 @@ int main()
             &&
             selection != "Q" && selection != "q")
         {
+            cout << endl;
             cout << "Error. Input must be between 0-10 or Q/q to quit." << endl;
+            cout << endl;
         }
 
         if (selection == "Q" || selection == "q")
