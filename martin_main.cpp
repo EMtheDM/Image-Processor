@@ -499,9 +499,9 @@ vector<vector<Pixel>> process_8(const vector<vector<Pixel>>& image, double scali
             int green_value = image[row][col].green;
             int blue_value = image[row][col].blue;
 
-            double new_red = (255 - (255 - red_value) * scaling_factor);
-            double new_green = (255 - (255 - green_value) * scaling_factor);
-            double new_blue = (255 - (255 - blue_value) * scaling_factor);
+            int new_red = (255 - (255 - red_value) * scaling_factor);
+            int new_green = (255 - (255 - green_value) * scaling_factor);
+            int new_blue = (255 - (255 - blue_value) * scaling_factor);
 
             Pixel new_pixel;
             new_pixel.red = new_red;
@@ -531,9 +531,9 @@ vector<vector<Pixel>> process_9(const vector<vector<Pixel>>& image, double scali
             int green_value = image[row][col].green;
             int blue_value = image[row][col].blue;
 
-            double new_red = red_value * scaling_factor;
-            double new_green = green_value * scaling_factor;
-            double new_blue = blue_value * scaling_factor;
+            int new_red = red_value * scaling_factor;
+            int new_green = green_value * scaling_factor;
+            int new_blue = blue_value * scaling_factor;
 
             Pixel new_pixel;
             new_pixel.red = new_red;
