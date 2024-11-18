@@ -636,6 +636,7 @@ vector<vector<Pixel>> process_10(const vector<vector<Pixel>>& image)
     return new_image;
 }
 
+// Run menu UI
 string menu(string filename)
 {
     cout << "" << endl;
@@ -661,6 +662,7 @@ string menu(string filename)
     return selection;
 }
 
+// Verify filename is .bmp
 string get_valid_filename(string prompt)
 {
     string filename;
@@ -676,6 +678,7 @@ string get_valid_filename(string prompt)
     }
 }
 
+// Verify output filename is .bmp, and not the same as input filename or an already saved output filename
 string get_output_filename(string input_filename, vector<string> existing_outputs, string prompt)
 {
     string output_filename;
@@ -702,6 +705,7 @@ string get_output_filename(string input_filename, vector<string> existing_output
     }
 }
 
+// Ask for and verify number
 int get_valid_number(string prompt, int min_value)
 {
     int value;
@@ -718,6 +722,7 @@ int get_valid_number(string prompt, int min_value)
     }
 }
 
+// Ask for and verify scaling factor
 double get_valid_scaling_factor(string prompt, double min_value, double max_value)
 {
     double value;
