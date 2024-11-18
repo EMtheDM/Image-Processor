@@ -718,7 +718,7 @@ int get_valid_number(string prompt, int min_value)
     }
 }
 
-int get_valid_scaling_factor(string prompt, double min_value, double max_value)
+double get_valid_scaling_factor(string prompt, double min_value, double max_value)
 {
     double value;
     while (true)
