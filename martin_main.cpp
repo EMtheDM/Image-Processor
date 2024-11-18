@@ -700,15 +700,27 @@ string get_output_filename(string input_filename, vector<string> existing_output
             cout << "Error: Output filename cannot be the same as the input filename." << endl;
             cout << endl;
         }
-        else if (find(existing_outputs.begin(), existing_outputs.end(), output_filename) != existing_outputs.end())
-        {
-            cout << endl;
-            cout << "Error: Output filename already exists." << endl;
-            cout << endl;
-        }
         else
         {
-            return output_filename;
+            bool exists = false;
+            for (int i = 0; i < existing_outputs.size(); i++)
+            {
+                if (existing_outputs[i] == output_filename)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (exists)
+            {
+                cout << endl;
+                cout << "Error: Output filename already exists." << endl;
+                cout << endl;
+            }
+            else
+            {
+                return output_filename;
+            }
         }
     }
 }
