@@ -807,7 +807,7 @@ int main()
         if (selection == "Q" || selection == "q")
         {
             cout << "" << endl;
-            cout << "Quitting program....Goodbye!" << endl;
+            cout << "Thank you for using my program....Goodbye!" << endl;
             cout << "" << endl;
             break;
         }
