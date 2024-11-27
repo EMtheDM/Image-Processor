@@ -767,9 +767,9 @@ double get_valid_scaling_factor(string prompt, double min_value, double max_valu
 
 int main()
 {
-    cout << "" << endl;
+    cout << endl;
     cout << "CSPB 1300 Image Processing Application" << endl;
-    cout << "" << endl;
+    cout << endl;
     string filename;
     filename = get_valid_filename("Please enter a filename (.bmp only): ");
 
@@ -806,9 +806,9 @@ int main()
 
         if (selection == "Q" || selection == "q")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Thank you for using my program....Goodbye!" << endl;
-            cout << "" << endl;
+            cout << endl;
             break;
         }
 
@@ -822,25 +822,25 @@ int main()
         // UI if user selects option "1"
         else if (selection == "1")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Vignette selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             vignette_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(vignette_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_1(image);
             write_image(vignette_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied vignette and saved to " << vignette_output << "!" << endl;
         }
 
         // UI if user selects option "2"
         else if (selection == "2")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Clarendon selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             clarendon_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(clarendon_output);
 
@@ -849,48 +849,48 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_2(image, scaling_factor);
             write_image(clarendon_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied clarendon and saved to " << clarendon_output << "!" << endl;
         }
 
         // UI if user selects option "3"
         else if (selection == "3")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Grayscale selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             grayscale_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(grayscale_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_3(image);
             write_image(grayscale_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied grayscale and saved to " << grayscale_output << "!" << endl;
         }
 
         // UI if user selects option "4"
         else if (selection == "4")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Rotate 90 Degrees selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             rotate_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(vignette_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_4(image);
             write_image(rotate_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied rotate 90 degrees and saved to " << rotate_output << "!" << endl;
         }
 
         // UI if user selects option "5"
         else if (selection == "5")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Rotate 90 Degrees selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             rotate_multiple_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(rotate_multiple_output);
 
@@ -899,16 +899,16 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_5(image, number);
             write_image(rotate_multiple_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied rotate 90 degrees and saved to " << rotate_multiple_output << "!" << endl;
         }
 
         // UI if user selects option "6"
         else if (selection == "6")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Enlarge selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             enlarge_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(enlarge_output);
 
@@ -918,32 +918,32 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_6(image, x_scale, y_scale);
             write_image(enlarge_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied enlarge and saved to " << enlarge_output << "!" << endl;
         }
 
         // UI if user selects option "7"
         else if (selection == "7")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "High Contrast selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             contrast_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(contrast_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_7(image);
             write_image(contrast_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied high contrast and saved to " << contrast_output << "!" << endl;
         }
 
         // UI if user selects option "8"
         else if (selection == "8")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Lighten selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             lighten_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(lighten_output);
 
@@ -952,16 +952,16 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_8(image, scaling_factor);
             write_image(lighten_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied lighten and saved to " << lighten_output << "!" << endl;
         }
 
         // UI if user selects option "9"
         else if (selection == "9")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Darken selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             darken_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(darken_output);
 
@@ -970,23 +970,23 @@ int main()
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_9(image, scaling_factor);
             write_image(darken_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied darken and saved to " << darken_output << "!" << endl;
         }
 
         // UI if user selects option "10"
         else if (selection == "10")
         {
-            cout << "" << endl;
+            cout << endl;
             cout << "Black, White, Red, Green, Blue selected" << endl;
-            cout << "" << endl;
+            cout << endl;
             color_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
             output_filenames.push_back(color_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_10(image);
             write_image(color_output, new_image);
-            cout << "" << endl;
+            cout << endl;
             cout << "Successfully applied colors and saved to " << color_output << "!" << endl;
         }
     }
