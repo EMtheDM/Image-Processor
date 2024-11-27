@@ -693,7 +693,7 @@ string get_output_filename(string input_filename, vector<string> existing_output
             cout << endl;
             cout << "Exiting program..." << endl;
             cout << endl;
-            break;
+            return "";
         }
 
         if (output_filename == "menu" || output_filename == "Menu" || output_filename == "MENU")
@@ -742,13 +742,34 @@ string get_output_filename(string input_filename, vector<string> existing_output
 }
 
 // Ask for and verify number
-int get_valid_number(string prompt, int min_value)
+int get_valid_number(string prompt, int min_value, string input_filename)
 {
+    string input;
     int value;
     while (true)
     {
         cout << prompt;
-        if (cin >> value && value >= min_value)
+        cin >> input;
+        if (input == "Q" || input == "q")
+        {
+            cout << endl;
+            cout << "Thank you for using my program....Goodbye!" << endl;
+            cout << endl;
+            return 1;
+        }
+
+        if (input == "menu" || input == "Menu" || input == "MENU")
+        {
+            cout << endl;
+            cout << "Returning to menu..." << endl;
+            cout << endl;
+            menu(input_filename);
+            continue;
+        }
+
+        value = stoi(input);
+
+        if (value >= min_value)
         {
             return value;
         }
@@ -761,13 +782,34 @@ int get_valid_number(string prompt, int min_value)
 }
 
 // Ask for and verify scaling factor
-double get_valid_scaling_factor(string prompt, double min_value, double max_value)
+double get_valid_scaling_factor(string prompt, double min_value, double max_value, string input_filename)
 {
+    string input;
     double value;
     while (true)
     {
         cout << prompt;
-        if (cin >> value && value > min_value && value < max_value)
+        cin >> input;
+        if (input == "Q" || input == "q")
+        {
+            cout << endl;
+            cout << "Thank you for using my program....Goodbye!" << endl;
+            cout << endl;
+            return 1;
+        }
+
+        if (input == "menu" || input == "Menu" || input == "MENU")
+        {
+            cout << endl;
+            cout << "Returning to menu..." << endl;
+            cout << endl;
+            menu(input_filename);
+            continue;
+        }
+
+        value = stod(input);
+
+        if (value > min_value && value < max_value)
         {
             return value;
         }
@@ -860,7 +902,7 @@ int main()
             clarendon_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(clarendon_output);
 
-            double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0);
+            double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0, filename);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_2(image, scaling_factor);
@@ -910,7 +952,7 @@ int main()
             rotate_multiple_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(rotate_multiple_output);
 
-            int number = get_valid_number("Enter a number: ", 1);
+            int number = get_valid_number("Enter a number: ", 1, filename);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_5(image, number);
@@ -928,8 +970,8 @@ int main()
             enlarge_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(enlarge_output);
 
-            int x_scale = get_valid_number("Enter a number: ", 1);
-            int y_scale = get_valid_number("Enter another number: ", 1);
+            int x_scale = get_valid_number("Enter a number: ", 1, filename);
+            int y_scale = get_valid_number("Enter another number: ", 1, filename);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_6(image, x_scale, y_scale);
@@ -963,7 +1005,7 @@ int main()
             lighten_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(lighten_output);
 
-            double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0);
+            double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0, filename);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_8(image, scaling_factor);
@@ -981,7 +1023,7 @@ int main()
             darken_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(darken_output);
 
-            double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0);
+            double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0, filename);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_9(image, scaling_factor);
