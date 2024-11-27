@@ -688,6 +688,22 @@ string get_output_filename(string input_filename, vector<string> existing_output
     {
         cout << prompt;
         cin >> output_filename;
+        if (output_filename == "Q" || output_filename == "q")
+        {
+            cout << endl;
+            cout << "Exiting program..." << endl;
+            cout << endl;
+            break;
+        }
+
+        if (output_filename == "menu" || output_filename == "Menu" || output_filename == "MENU")
+        {
+            cout << endl;
+            cout << "Returning to menu..." << endl;
+            cout << endl;
+            menu(input_filename);
+        }
+
         if (output_filename.length() < 4 || output_filename.substr(output_filename.length() -4) != ".bmp")
         {
             cout << endl;
@@ -825,7 +841,7 @@ int main()
             cout << endl;
             cout << "Vignette selected" << endl;
             cout << endl;
-            vignette_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            vignette_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(vignette_output);
 
             // Runs the proper process and writes the image to user provided output file.
@@ -841,7 +857,7 @@ int main()
             cout << endl;
             cout << "Clarendon selected" << endl;
             cout << endl;
-            clarendon_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            clarendon_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(clarendon_output);
 
             double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0);
@@ -859,7 +875,7 @@ int main()
             cout << endl;
             cout << "Grayscale selected" << endl;
             cout << endl;
-            grayscale_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            grayscale_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(grayscale_output);
 
             // Runs the proper process and writes the image to user provided output file.
@@ -875,7 +891,7 @@ int main()
             cout << endl;
             cout << "Rotate 90 Degrees selected" << endl;
             cout << endl;
-            rotate_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            rotate_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(vignette_output);
 
             // Runs the proper process and writes the image to user provided output file.
@@ -891,7 +907,7 @@ int main()
             cout << endl;
             cout << "Rotate 90 Degrees selected" << endl;
             cout << endl;
-            rotate_multiple_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            rotate_multiple_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(rotate_multiple_output);
 
             int number = get_valid_number("Enter a number: ", 1);
@@ -909,7 +925,7 @@ int main()
             cout << endl;
             cout << "Enlarge selected" << endl;
             cout << endl;
-            enlarge_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            enlarge_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(enlarge_output);
 
             int x_scale = get_valid_number("Enter a number: ", 1);
@@ -928,7 +944,7 @@ int main()
             cout << endl;
             cout << "High Contrast selected" << endl;
             cout << endl;
-            contrast_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            contrast_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(contrast_output);
 
             // Runs the proper process and writes the image to user provided output file.
@@ -944,7 +960,7 @@ int main()
             cout << endl;
             cout << "Lighten selected" << endl;
             cout << endl;
-            lighten_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            lighten_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(lighten_output);
 
             double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0);
@@ -962,7 +978,7 @@ int main()
             cout << endl;
             cout << "Darken selected" << endl;
             cout << endl;
-            darken_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            darken_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(darken_output);
 
             double scaling_factor = get_valid_scaling_factor("Enter scaling factor: ", 0.0, 1.0);
@@ -980,7 +996,7 @@ int main()
             cout << endl;
             cout << "Black, White, Red, Green, Blue selected" << endl;
             cout << endl;
-            color_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only): ");
+            color_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
             output_filenames.push_back(color_output);
 
             // Runs the proper process and writes the image to user provided output file.
