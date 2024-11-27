@@ -670,6 +670,14 @@ string get_valid_filename(string prompt)
     {
         cout << prompt;
         cin >> filename;
+        if (filename == "Q" || filename == "q")
+        {
+            cout << endl;
+            cout << "Thank you for using my program....Goodbye!" << endl;
+            cout << endl;
+            exit(0);
+        }
+
         if (filename.length() >= 4 && filename.substr(filename.length() - 4) == ".bmp")
         {
             return filename;
@@ -691,9 +699,9 @@ string get_output_filename(string input_filename, vector<string> existing_output
         if (output_filename == "Q" || output_filename == "q")
         {
             cout << endl;
-            cout << "Exiting program..." << endl;
+            cout << "Thank you for using my program....Goodbye!" << endl;
             cout << endl;
-            return "";
+            exit(0);
         }
 
         if (output_filename == "menu" || output_filename == "Menu" || output_filename == "MENU")
@@ -755,7 +763,7 @@ int get_valid_number(string prompt, int min_value, string input_filename)
             cout << endl;
             cout << "Thank you for using my program....Goodbye!" << endl;
             cout << endl;
-            return 1;
+            exit(0);
         }
 
         if (input == "menu" || input == "Menu" || input == "MENU")
@@ -795,7 +803,7 @@ double get_valid_scaling_factor(string prompt, double min_value, double max_valu
             cout << endl;
             cout << "Thank you for using my program....Goodbye!" << endl;
             cout << endl;
-            return 1;
+            exit(0);
         }
 
         if (input == "menu" || input == "Menu" || input == "MENU")
