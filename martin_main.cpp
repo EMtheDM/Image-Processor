@@ -896,9 +896,17 @@ int main()
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_1(image);
-            write_image(vignette_output, new_image);
-            cout << endl;
-            cout << "Successfully applied vignette and saved to " << vignette_output << "!" << endl;
+            if (write_image(vignette_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied vignette and saved to " << vignette_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << vignette_output << "." << endl;
+            }
+
         }
 
         // UI if user selects option "2"
@@ -914,9 +922,16 @@ int main()
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_2(image, scaling_factor);
-            write_image(clarendon_output, new_image);
-            cout << endl;
-            cout << "Successfully applied clarendon and saved to " << clarendon_output << "!" << endl;
+            if (write_image(clarendon_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied clarendon and saved to " << clarendon_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << clarendon_output << "." << endl;
+            }
         }
 
         // UI if user selects option "3"
@@ -930,9 +945,16 @@ int main()
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_3(image);
-            write_image(grayscale_output, new_image);
-            cout << endl;
-            cout << "Successfully applied grayscale and saved to " << grayscale_output << "!" << endl;
+            if (write_image(grayscale_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied grayscale and saved to " << grayscale_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << grayscale_output << "." << endl;
+            }
         }
 
         // UI if user selects option "4"
@@ -942,13 +964,20 @@ int main()
             cout << "Rotate 90 Degrees selected" << endl;
             cout << endl;
             rotate_output = get_output_filename(filename, output_filenames, "Enter output filename (.bmp only), (Type Q/q to quit, menu to return to menu): ");
-            output_filenames.push_back(vignette_output);
+            output_filenames.push_back(rotate_output);
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_4(image);
-            write_image(rotate_output, new_image);
-            cout << endl;
-            cout << "Successfully applied rotate 90 degrees and saved to " << rotate_output << "!" << endl;
+            if (write_image(rotate_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied rotate 90 degrees and saved to " << rotate_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << rotate_output << "." << endl;
+            }
         }
 
         // UI if user selects option "5"
@@ -964,9 +993,16 @@ int main()
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_5(image, number);
-            write_image(rotate_multiple_output, new_image);
-            cout << endl;
-            cout << "Successfully applied rotate 90 degrees and saved to " << rotate_multiple_output << "!" << endl;
+            if (write_image(rotate_multiple_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied rotate 90 degrees multiple times and saved to " << rotate_multiple_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << rotate_multiple_output << "." << endl;
+            }
         }
 
         // UI if user selects option "6"
@@ -983,9 +1019,16 @@ int main()
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_6(image, x_scale, y_scale);
-            write_image(enlarge_output, new_image);
-            cout << endl;
-            cout << "Successfully applied enlarge and saved to " << enlarge_output << "!" << endl;
+            if (write_image(enlarge_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied enlarge and saved to " << enlarge_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << enlarge_output << "." << endl;
+            }
         }
 
         // UI if user selects option "7"
@@ -999,9 +1042,16 @@ int main()
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_7(image);
-            write_image(contrast_output, new_image);
-            cout << endl;
-            cout << "Successfully applied high contrast and saved to " << contrast_output << "!" << endl;
+            if (write_image(contrast_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied high contrast and saved to " << contrast_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << contrast_output << "." << endl;
+            }
         }
 
         // UI if user selects option "8"
@@ -1017,9 +1067,16 @@ int main()
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_8(image, scaling_factor);
-            write_image(lighten_output, new_image);
-            cout << endl;
-            cout << "Successfully applied lighten and saved to " << lighten_output << "!" << endl;
+            if (write_image(lighten_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied lighten and saved to " << lighten_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << lighten_output << "." << endl;
+            }
         }
 
         // UI if user selects option "9"
@@ -1035,9 +1092,16 @@ int main()
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_9(image, scaling_factor);
-            write_image(darken_output, new_image);
-            cout << endl;
-            cout << "Successfully applied darken and saved to " << darken_output << "!" << endl;
+            if (write_image(darken_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied darken and saved to " << darken_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << darken_output << "." << endl;
+            }
         }
 
         // UI if user selects option "10"
@@ -1051,9 +1115,16 @@ int main()
 
             // Runs the proper process and writes the image to user provided output file.
             new_image = process_10(image);
-            write_image(color_output, new_image);
-            cout << endl;
-            cout << "Successfully applied colors and saved to " << color_output << "!" << endl;
+            if (write_image(color_output, new_image))
+            {
+                cout << endl;
+                cout << "Successfully applied colors and saved to " << color_output << "!" << endl;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Error: Failed to save the processed image to " << color_output << "." << endl;
+            }
         }
     }
 
